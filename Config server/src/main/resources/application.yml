@@ -1,0 +1,59 @@
+server:
+  port: 9000
+
+spring.cloud.config.server:
+  git:
+    uri: git@github.com:mini0192/config-test.git
+    ignoreLocalSshSettings: true
+    privateKey: |
+      -----BEGIN RSA PRIVATE KEY-----
+      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
+      -----END RSA PRIVATE KEY-----

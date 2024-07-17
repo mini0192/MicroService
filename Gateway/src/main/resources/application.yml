@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+eureka.client:
+  registerWithEureka: true #유레카 서버에 등록할지 여부
+  fetchRegistry: true #유레카 서버의 정보를 가져올지 여부
+  serviceUrl:
+    defaultZone: http://admin:1234@localhost:8761/eureka #유레카 서버 주소
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: ms1
+          uri: lb://ms1
+          predicates:
+            - Path=/ms1/**
+          filters:
+            - RewritePath=/ms1/(?<segment>.*), /$\{segment}
+
+        - id: ms2
+          uri: lb://ms2
+          predicates:
+            - Path=/ms2/**
+          filters:
+            - RewritePath=/ms2/(?<segment>.*), /$\{segment}
